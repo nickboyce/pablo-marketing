@@ -10,7 +10,7 @@ export function Header() {
           <Link href="/" className="mr-6 flex items-center">
             <div className="flex items-center">
               <Image 
-                src="/brand/pablo-character.png" 
+                src="/brand/pablo-character.svg" 
                 alt="Pablo Character" 
                 width={40}
                 height={40}

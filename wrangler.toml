@@ -1,0 +1,13 @@
+# Top-level configuration
+name = "pablo-marketing" # Should match your Cloudflare Pages project name
+compatibility_date = "2024-04-15" # Use today's date or a recent date
+
+[[rules]] # Needed for Pages Functions, even if empty for now
+type = "ESModule"
+globs = ["_worker.js"]
+
+[vars] # Add your NODE_VERSION here too for consistency
+NODE_VERSION = "20"
+
+[compatibility_flags]
+nodejs_compat = true 

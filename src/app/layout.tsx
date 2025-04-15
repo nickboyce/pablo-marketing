@@ -19,7 +19,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Pablo - Facebook Ad Creation Made Easy",
-  description: "Pablo makes ad creation 10× faster and eliminates errors. No more copy-pasting into Meta Ads Manager.",
+  description: "Pablo makes ad creation 10× faster and eliminates errors. No more copy-pasting Meta Ads Manager.",
 };
 
 export default function RootLayout({

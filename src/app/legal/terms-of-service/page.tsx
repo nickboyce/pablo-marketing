@@ -1,6 +1,6 @@
 export default function TermsOfService() {
   return (
-    <div className="bg-background rounded-lg p-6 my-8">
+    <div className="py-12 lg:py-8">
       <h1 className="text-3xl font-bold mb-6 text-foreground">Terms of Service</h1>
 
       <div className="prose max-w-none">

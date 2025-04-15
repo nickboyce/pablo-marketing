@@ -1,0 +1,317 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-white py-12">
+    <!-- Hero Section -->
+    <div class="max-w-5xl mx-auto mb-20">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight mb-8">
+            Building Facebook ads doesn't need to be painful
+        </h1>
+        
+        <div class="text-xl md:text-2xl leading-relaxed mb-12 max-w-4xl">
+            <p>Pablo makes ad creation 10× faster and eliminates errors. No more copy-pasting into Meta Ads Manager—Pablo integrates with Notion or Airtable to automate your creative workflows.</p>
+            <p class="mt-4">Now in private beta, generating 1,000+ ads per month. </p>
+        </div>
+    
+        <a href="https://trampoline-analytics.notion.site/1aed8901aa2780fb86aacf588ebd6384" class="inline-flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium bg-pablo-orange text-pablo-blue hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pablo-orange transition-colors">
+            Join waitlist
+        </a>
+    </div>
+
+    <!-- Video Demo Section -->
+    <div class="max-w-5xl mx-auto mt-20 mb-20">
+        <style>
+            /* CSS for the video placeholder */
+            .video-placeholder {
+                position: relative;
+                padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+                background: linear-gradient(135deg, #211C84 0%, #3a34b3 100%);
+                border-radius: 0.5rem;
+                overflow: hidden;
+            }
+            
+            /* Video overlay styles */
+            .video-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                background-color: rgba(0, 0, 0, 0.3);
+                z-index: 10;
+                cursor: pointer; /* Show pointer cursor on hover */
+            }
+            
+            .video-overlay-text {
+                color: white;
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin-left: 1rem;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            
+            .video-play-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Hide overlay when video is playing */
+            video:playing + .video-overlay {
+                display: none;
+            }
+        </style>
+        
+        <div class="video-container relative rounded-lg overflow-hidden shadow-xl">
+            <!-- HTML5 Video with Poster (Thumbnail) -->
+            <div style="padding-bottom: 56.25%; height: 0; position: relative;">
+                <video id="pablo-demo-video"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                        poster="/static/videos/pablo_demo_v1_thumbnail.jpg"
+                        controls
+                        preload="none">
+                    <source src="https://pub-57c5ca58566d4b0eb59f328c6e5a6361.r2.dev/pablo_demo_v1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                
+                <!-- Overlay with play icon and text -->
+                <div class="video-overlay" id="video-overlay">
+                    <div class="video-play-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="video-overlay-text">See Pablo in Action</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Features Section -->
+    <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-12">Features</h2>
+        
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+            <div class="feature-item">
+                <h3 class="text-xl font-semibold mb-2">Naming convention compliance</h3>
+                <p class="">Ensure all your ads follow your team's naming conventions automatically.</p>
+            </div>
+            
+            <div class="feature-item">
+                <h3 class="text-xl font-semibold mb-2">Customised assets</h3>
+                <p class="">Support for square and vertical formats only (more formats coming soon).</p>
+            </div>
+            
+            <div class="feature-item">
+                <h3 class="text-xl font-semibold mb-2">Build from where you already work</h3>
+                <p class="">BYO Notion or Airtable databases or use our templates (coming soon).</p>
+            </div>
+            
+            <div class="feature-item">
+                <h3 class="text-xl font-semibold mb-2">Template inheritance</h3>
+                <p class="">Inherits tracking, social profile linking and Advantage+ AI preferences from a template ad.</p>
+            </div>
+            
+            <div class="feature-item">
+                <h3 class="text-xl font-semibold mb-2">Actionable feedback</h3>
+                <p class="">If Pablo has any problems, they are reported back as comments for easy troubleshooting.</p>
+            </div>
+            
+            <div class="feature-item">
+                <h3 class="text-xl font-semibold mb-2">Instant forms creation</h3>
+                <p class="">Experimental support for instant forms creation.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="max-w-5xl mx-auto mt-20">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-12">Frequently Asked Questions</h2>
+        
+        <div class="space-y-6">
+            <!-- FAQ Item 1 -->
+            <div class="faq-item">
+                <button class="faq-question w-full flex justify-between items-center text-left py-4 px-6 bg-white/10 hover:bg-white/15 rounded-lg transition-colors" onclick="toggleFaq(this)">
+                    <span class="text-xl font-semibold">How does Pablo integrate with my existing workflow?</span>
+                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden mt-2 px-6 py-4 bg-white/5 rounded-lg">
+                    <p>Pablo connects with Notion, Airtable, and other data sources to pull your ad content. You can structure your data however you like, and Pablo will map it to the right fields in Meta Ads Manager. This means you can keep using your existing tools and workflows while automating the tedious parts.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 2 -->
+            <div class="faq-item">
+                <button class="faq-question w-full flex justify-between items-center text-left py-4 px-6 bg-white/10 hover:bg-white/15 rounded-lg transition-colors" onclick="toggleFaq(this)">
+                    <span class="text-xl font-semibold">What types of ads can I create with Pablo?</span>
+                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden mt-2 px-6 py-4 bg-white/5 rounded-lg">
+                    <p>Currently, Pablo supports Image and Video ad formats with square and vertical assets. We're working on adding support for Carousel ads and more asset formats in the near future. Pablo inherits tracking, social profile linking, and Advantage+ AI preferences from your template ads.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 3 -->
+            <div class="faq-item">
+                <button class="faq-question w-full flex justify-between items-center text-left py-4 px-6 bg-white/10 hover:bg-white/15 rounded-lg transition-colors" onclick="toggleFaq(this)">
+                    <span class="text-xl font-semibold">How does Pablo handle errors?</span>
+                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden mt-2 px-6 py-4 bg-white/5 rounded-lg">
+                    <p>Pablo validates your ad content before submission and reports any errors back as comments in your source data. This means you'll know exactly what needs to be fixed and where. Common errors include missing required fields, invalid URLs, or asset dimension issues.</p>
+                </div>
+            </div>
+            
+            <!-- FAQ Item 4 -->
+            <div class="faq-item">
+                <button class="faq-question w-full flex justify-between items-center text-left py-4 px-6 bg-white/10 hover:bg-white/15 rounded-lg transition-colors" onclick="toggleFaq(this)">
+                    <span class="text-xl font-semibold">Are there any limitations I should be aware of?</span>
+                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden mt-2 px-6 py-4 bg-white/5 rounded-lg">
+                    <p>Due to Meta's API limitations, there may be a limit to how many ads can be built in an hour. Pablo is designed to work within these constraints and will queue your requests appropriately. Additionally, some advanced Meta Ads Manager features may require manual configuration in the Meta interface.</p>
+                </div>
+            </div>
+
+
+            <!-- FAQ Item  -->
+            <div class="faq-item">
+                <button class="faq-question w-full flex justify-between items-center text-left py-4 px-6 bg-white/10 hover:bg-white/15 rounded-lg transition-colors" onclick="toggleFaq(this)">
+                    <span class="text-xl font-semibold">How much does Pablo cost?</span>
+                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden mt-2 px-6 py-4 bg-white/5 rounded-lg">
+                    <p>Pablo is currently in beta and and is $100USD per month for beta testers. We will be launching a subscription model in the future.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item  -->
+            <div class="faq-item">
+                <button class="faq-question w-full flex justify-between items-center text-left py-4 px-6 bg-white/10 hover:bg-white/15 rounded-lg transition-colors" onclick="toggleFaq(this)">
+                    <span class="text-xl font-semibold">How do I get access to Pablo?</span>
+                    <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="faq-answer hidden mt-2 px-6 py-4 bg-white/5 rounded-lg">
+                    <p>While we are in testing you'll need to <a href="https://developers.facebook.com/">set up a developer account</a>, then give us your Facebook ID (you can paste your profile URL into <a href="https://lookup-id.com/#">this tool</a>). We'll then add you to the beta list and you'll need to <a href="https://developers.facebook.com/settings/developer/requests/">accept our invitation here</a>.</p>
+                </div>
+            </div>            
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Handle auth tokens in URL hash
+    const hash = window.location.hash;
+    if (hash) {
+        const params = new URLSearchParams(hash.substring(1));
+        const access_token = params.get('access_token');
+        const type = params.get('type');
+        
+        if (access_token) {
+            if (type === 'recovery') {
+                // For password reset, redirect to update password page with tokens
+                const refresh_token = params.get('refresh_token');
+                window.location.href = `/reset-password/new#access_token=${access_token}&refresh_token=${refresh_token}`;
+            } else if (type === 'signup' || type === 'magiclink') {
+                // For login flows, set the session
+                fetch('/auth/session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        access_token,
+                        type 
+                    })
+                }).then(() => {
+                    window.location.href = '/connections/';
+                });
+            }
+        }
+    }
+
+    // FAQ accordion functionality
+    function toggleFaq(element) {
+        const answer = element.nextElementSibling;
+        const icon = element.querySelector('svg');
+        
+        // Toggle the answer visibility
+        answer.classList.toggle('hidden');
+        
+        // Rotate the icon when open
+        if (answer.classList.contains('hidden')) {
+            icon.classList.remove('rotate-180');
+        } else {
+            icon.classList.add('rotate-180');
+        }
+    }
+
+    // Video overlay functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const video = document.getElementById('pablo-demo-video');
+        const overlay = document.querySelector('.video-overlay');
+        
+        if (video && overlay) {
+            // Add click handler to overlay
+            overlay.addEventListener('click', function() {
+                video.play();
+            });
+            
+            video.addEventListener('play', function() {
+                overlay.style.display = 'none';
+            });
+            
+            video.addEventListener('pause', function() {
+                if (video.currentTime === 0) {
+                    overlay.style.display = 'flex';
+                }
+            });
+            
+            // Make sure overlay is visible initially
+            overlay.style.display = 'flex';
+        }
+    });
+
+    // Function to get query parameters
+    function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+    
+    // Check if this is a post-authentication redirect
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check for indicators of email confirmation or magic link
+        const isConfirmation = getQueryParam('confirmation') === 'true' || 
+                               getQueryParam('type') === 'email' ||
+                               getQueryParam('auth') === 'true';
+        
+        if (isConfirmation) {
+            // Show loading overlay
+            document.getElementById('loading-overlay').classList.remove('hidden');
+            
+            // Wait briefly to ensure the auth process completes
+            setTimeout(function() {
+                // Redirect to connections page
+                window.location.href = '/connections/';
+            }, 2000); // 2 second delay, adjust as needed
+        }
+    });
+</script>
+{% endblock %} 

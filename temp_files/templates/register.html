@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="max-w-md mx-auto">
+        <div class="bg-white rounded-lg shadow-md p-8 mb-4">
+            <h2 class="text-2xl font-bold mb-6 text-gray-900">Create an Account</h2>
+            
+            {% if error %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+                <p>{{ error }}</p>
+            </div>
+            {% endif %}
+            
+            <form method="post" action="/auth/register" class="space-y-6" id="register-form">
+                <!-- Hidden field for Turnstile response -->
+                <input type="hidden" name="cf_turnstile_response" id="cf_turnstile_response">
+                
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" name="email" id="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                
+                <!-- <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name (optional)</label>
+                    <input type="text" name="name" id="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div> -->
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" name="password" id="password" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    <p class="mt-1 text-xs text-gray-500">Must be at least 8 characters</p>
+                </div>
+                
+                <div>
+                    <label for="password_confirm" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                    <input type="password" name="password_confirm" id="password_confirm" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                
+                <!-- Cloudflare Turnstile widget - simplified for debugging -->
+                <div class="mb-4">
+                    <div class="cf-turnstile" data-sitekey="{{ settings.cloudflare_turnstile_site_key }}"></div>
+                </div>
+                
+                <div class="flex items-start">
+                    <input type="checkbox" name="terms_accepted" id="terms_accepted" required class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded mt-1">
+                    <label for="terms_accepted" class="ml-2 block text-sm text-gray-700">
+                        I accept the <a href="/legal/terms-of-service" class="text-indigo-600 hover:text-indigo-500">Terms of Service</a> and <a href="/legal/privacy-policy" class="text-indigo-600 hover:text-indigo-500">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <div>
+                    <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Register
+                    </button>
+                </div>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">
+                    Already have an account? <a href="/auth/login" class="font-medium text-indigo-600 hover:text-indigo-500">Sign in</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    {% include "partials/flash_messages.html" %}
+{% endblock %}
+
+{% block scripts %}
+<!-- Cloudflare Turnstile script -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<script>
+    // Validate form before submission
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('register-form');
+        if (!form) {
+            console.error('Register form not found');
+            return;
+        }
+        
+        // Function to check if Turnstile is ready
+        function isTurnstileReady() {
+            const response = document.querySelector('[name="cf-turnstile-response"]');
+            return response && response.value;
+        }
+        
+        // Function to update hidden field with Turnstile response
+        function updateTurnstileResponse() {
+            const response = document.querySelector('[name="cf-turnstile-response"]');
+            const hiddenField = document.getElementById('cf_turnstile_response');
+            
+            if (response && hiddenField) {
+                hiddenField.value = response.value;
+            }
+        }
+        
+        // Check periodically for Turnstile response
+        setInterval(updateTurnstileResponse, 1000);
+        
+        form.addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('password_confirm').value;
+            
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Passwords do not match');
+                return false;
+            }
+        });
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+supabase
+httpx
+jinja2
+python-multipart
+PyJWT
+pydantic-settings>=2.0.0
+python-dotenv
+pydantic>=2.0.0
+pydantic-settings
+notion-client>=1.0.0

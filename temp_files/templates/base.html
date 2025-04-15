@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pablo</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
+    <link rel="shortcut icon" href="/static/icons/favicon.ico">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'pablo-blue': '#211C84',
+              'pablo-orange': '#FFAB5B',
+              'pablo-green': '#D8FF85',
+              'pablo-cream': '#FFF2DB',
+            },
+            fontFamily: {
+              'heading': ['Space Grotesk', 'sans-serif'],
+              'body': ['Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #211C84;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Inter', sans-serif;
+      }
+      main {
+        flex: 1;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      /* Common form styles */
+      .form-input {
+        @apply mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm;
+        @apply focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm;
+      }
+      .form-label {
+        @apply block text-sm font-medium text-gray-700;
+      }
+    </style>
+</head>
+<body class="">
+    <!-- Loading overlay - hidden by default -->
+    <div id="loading-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mx-auto mb-4"></div>
+            <p class="text-lg font-medium">Redirecting...</p>
+        </div>
+    </div>
+
+    <header>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex justify-between items-center">
+                <a href="/" class="hover:opacity-80 transition-opacity">
+                    <div class="flex items-center">
+                        <img src="/static/brand/pablo-character.png" alt="" class="h-10 mr-2">
+                        <img src="/static/brand/pablo-logotype.svg" alt="Pablo" class="h-8">
+                    </div>
+                </a>
+                <div class="flex items-center">                    
+                    <nav class="space-x-4">
+                        {% if is_authenticated %}                    
+                        <a href="/connections" class="text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">Connections</a>
+                        <a href="/auth/logout" class="text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">Logout</a>
+                        {% if current_user %}
+                        <span class="text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">{{ current_user.email }}</span>
+                        {% endif %}                            
+                        {% else %}
+                        <a href="/auth/login" class="text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                        {% if settings and settings.ENV == 'development' %}
+                        <a href="/auth/register" class="text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">Register</a>
+                        {% endif %}
+                        {% endif %}
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm text-white">&copy; 2023 Pablo. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="/legal/privacy-policy" class="text-sm text-white hover:underline">Privacy Policy</a>
+                    <a href="/legal/terms-of-service" class="text-sm text-white hover:underline">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    {% block scripts %}{% endblock %}
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+      // Pre-compute template values to avoid linter errors
+      const templateValues = {
+        settingsAvailable: {% if settings %}true{% else %}false{% endif %},
+        supabaseUrlAvailable: {% if settings and settings.SUPABASE_URL %}true{% else %}false{% endif %},
+        supabaseUrl: '{{ settings.SUPABASE_URL if settings else "" }}',
+        supabaseKey: '{{ settings.SUPABASE_KEY if settings else "" }}'
+      };
+      
+      // Declare supabaseClient in a wider scope so it's available to all functions
+      let supabaseClient;
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        // Use hardcoded values for now to test if that works
+        const supabaseUrl = templateValues.supabaseUrl;
+        const supabaseKey = templateValues.supabaseKey;
+        
+        // Check if we have the required values before initializing
+        if (supabaseUrl && supabaseKey) {
+          try {
+            supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+            console.log('Supabase client initialized successfully');
+          } catch (error) {
+            console.error('Error initializing Supabase client:', error);
+          }
+        } else {
+          console.error('Supabase URL or key is missing', { 
+            url: supabaseUrl ? 'provided' : 'missing', 
+            key: supabaseKey ? 'provided' : 'missing' 
+          });
+        }
+        
+        // Check for auth hash fragments in URL
+        const hash = window.location.hash.substring(1);
+        if (hash.includes('access_token') || hash.includes('type=recovery') || hash.includes('type=email_confirmation')) {
+          console.log('Auth redirect detected:', hash);
+          handleAuthWithSupabase();
+        }
+      });
+
+      async function handleAuthWithSupabase() {
+        try {
+          // Check if Supabase client was initialized
+          if (!supabaseClient) {
+            console.error('Supabase client not initialized');
+            return;
+          }
+          
+          // This will automatically extract the tokens from the URL
+          const { data, error } = await supabaseClient.auth.getSession();
+          
+          if (error) {
+            console.error('Error getting session:', error);
+            return;
+          }
+          
+          if (data?.session) {
+            console.log('Session retrieved successfully');
+            
+            // Send the tokens to the backend to set cookies
+            const response = await fetch('/auth/session', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                access_token: data.session.access_token,
+                refresh_token: data.session.refresh_token,
+                type: 'supabase_js'
+              })
+            });
+            
+            if (response.ok) {
+              // Remove the hash fragment and reload
+              window.location.hash = '';
+              window.location.href = '/';
+            } else {
+              console.error('Failed to create session:', response.status);
+            }
+          }
+        } catch (error) {
+          console.error('Error handling auth with Supabase:', error);
+        }
+      }
+
+      function handleAuthRedirect(hash) {
+        // Keep this as a fallback
+        // ...existing code...
+      }
+    </script>
+
+    <!-- Auth redirect detection script -->
+    <script>
+        // Function to show loading overlay and redirect
+        function showLoadingAndRedirect(url, delay) {
+            const overlay = document.getElementById('loading-overlay');
+            if (overlay) {
+                overlay.classList.remove('hidden');
+                setTimeout(function() {
+                    window.location.href = url;
+                }, delay || 1500);
+            } else {
+                // If overlay not found, redirect immediately
+                window.location.href = url;
+            }
+        }
+        
+        // Check for auth-related parameters
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            
+            // Check for various auth indicators
+            if (params.get('confirmation') === 'true' || 
+                params.get('auth') === 'true' ||
+                params.get('email_confirmed') === 'true' ||
+                params.get('access_token') ||
+                (params.get('type') && ['recovery', 'signup', 'magiclink', 'email'].includes(params.get('type')))) {
+                
+                showLoadingAndRedirect('/connections/', 2000);
+            }
+        });
+    </script>
+</body>
+</html> 

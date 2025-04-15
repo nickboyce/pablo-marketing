@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-6">API Keys</h2>
+        
+        {% if request.query_params.get('message') %}
+            <div class="mb-4 {% if request.query_params.get('error') %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %} p-4 rounded">
+                {{ request.query_params.get('message') }}
+            </div>
+        {% endif %}
+        
+        <div class="mb-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Create New API Key</h3>
+            <form action="/api-keys/create" method="post" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Key Name</label>
+                    <input type="text" 
+                           id="name" 
+                           name="name" 
+                           required
+                           placeholder="e.g., Notion Integration"
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                </div>
+                <button type="submit" 
+                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Create API Key
+                </button>
+            </form>
+        </div>
+        
+        <div class="border-t pt-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Your API Keys</h3>
+            
+            {% if keys %}
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Used</th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for key in keys %}
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ key.created_at }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ key.last_used_at or 'Never' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <a href="/api-keys/delete/{{ key.id }}" 
+                                           class="text-red-600 hover:text-red-900"
+                                           onclick="return confirm('Are you sure you want to delete this API key?')">
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-gray-500">You don't have any API keys yet.</p>
+            {% endif %}
+        </div>
+        
+        <form action="/api-keys/generate" method="post" class="mt-4">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Generate New API Key
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %} 

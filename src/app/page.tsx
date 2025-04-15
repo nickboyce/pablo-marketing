@@ -1,103 +1,196 @@
-import Image from "next/image";
+"use client"; // Needed for useState and useRef
+
+import { useState, useRef, useEffect } from 'react'; // Import useEffect
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
+import { Play } from 'lucide-react'; // Import Play icon
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handlePlayClick = () => {
+    setIsPlaying(true);
+  };
+
+  useEffect(() => {
+    if (isPlaying && videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.error("Video play failed:", error);
+        if (videoRef.current) videoRef.current.controls = true;
+      });
+    }
+  }, [isPlaying]);
+
+  return (
+    <div className="flex flex-col min-h-screen bg-background">
+      {/* Hero Section */}
+      <section className="py-12 lg:py-8">
+        <div className="mb-20">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8 text-primary">
+            Building Facebook ads doesn't need to be painful
+          </h1>
+          
+          <div className="text-xl md:text-2xl leading-relaxed mb-12 text-foreground">
+            <p>Pablo makes ad creation 10× faster and eliminates errors. No more copy-pasting into Meta Ads Manager—Pablo integrates with Notion or Airtable to automate your creative workflows.</p>
+            <p className="mt-4">Now in private beta, generating 1,000+ ads per month.</p>
+          </div>
+      
+          <Button variant="accent" size="lg" asChild>
+            <a href="https://trampoline-analytics.notion.site/1aed8901aa2780fb86aacf588ebd6384">
+              Join waitlist
+            </a>
+          </Button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Video Demo Section - Updated */}
+        <div className="mt-20 mb-20">
+          <div className="relative rounded-lg overflow-hidden shadow-xl aspect-video">
+            {!isPlaying ? (
+              // Placeholder Div
+              <div 
+                className="absolute inset-0 bg-cover bg-center cursor-pointer flex items-center justify-center group"
+                style={{ backgroundImage: "url('/videos/pablo_demo_v1_thumbnail.jpg')" }}
+                onClick={handlePlayClick}
+              >
+                {/* Subtle overlay on hover */}
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-200"></div>
+                {/* Play Button */}
+                <button 
+                  aria-label="Play video"
+                  className="relative z-10 rounded-full bg-white/30 p-4 text-white backdrop-blur-sm transition-all duration-200 group-hover:bg-white/50 group-hover:scale-110"
+                >
+                   <Play className="h-10 w-10 fill-white" />
+                </button>
+              </div>
+            ) : (
+              // Video Player
+              <video
+                ref={videoRef}
+                className="w-full h-full object-cover"
+                controls // Show controls once playing
+                autoPlay   // Add autoPlay attribute
+                preload="auto" // Start loading when placeholder clicked
+                onEnded={() => setIsPlaying(false)} // Optional: reset to placeholder when finished
+              >
+                <source src="https://pub-57c5ca58566d4b0eb59f328c6e5a6361.r2.dev/pablo_demo_v1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+          </div>
+        </div>
+        
+        {/* Features Section */}
+        <div className="">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-primary">Features</h2>
+          
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+            <Card className="bg-card">
+              <CardHeader>
+                <CardTitle className="text-primary">Naming convention compliance</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground">Ensure all your ads follow your team's naming conventions automatically.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-card">
+              <CardHeader>
+                <CardTitle className="text-primary">Customised assets</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground">Support for customized square and vertical formats (more formats coming soon).</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-card">
+              <CardHeader>
+                <CardTitle className="text-primary">Build from where you already work</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground">BYO Notion or Airtable databases or use our templates.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-card">
+              <CardHeader>
+                <CardTitle className="text-primary">Template inheritance</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground">Inherits tracking, social profile linking and Advantage+ AI preferences from a template ad.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-card">
+              <CardHeader>
+                <CardTitle className="text-primary">Actionable feedback</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground">If Pablo has any problems, they are reported back as comments for easy troubleshooting.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-card">
+              <CardHeader>
+                <CardTitle className="text-primary">Instant forms creation</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground">Experimental support for instant forms creation.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="mt-20">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-primary">Frequently Asked Questions</h2>
+          
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="workflow">
+              <AccordionTrigger className="text-primary">How does Pablo integrate with my existing workflow?</AccordionTrigger>
+              <AccordionContent className="text-foreground">
+                Pablo connects with Notion, Airtable, and other data sources to pull your ad content. You can structure your data however you like, and Pablo will map it to the right fields in Meta Ads Manager. This means you can keep using your existing tools and workflows while automating the tedious parts.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="ads">
+              <AccordionTrigger className="text-primary">What types of ads can I create with Pablo?</AccordionTrigger>
+              <AccordionContent className="text-foreground">
+                Currently, Pablo supports Image and Video ad formats with square and vertical assets. We're working on adding support for Carousel ads and more asset formats in the near future. Pablo inherits tracking, social profile linking, and Advantage+ AI preferences from your template ads.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="errors">
+              <AccordionTrigger className="text-primary">How does Pablo handle errors?</AccordionTrigger>
+              <AccordionContent className="text-foreground">
+                Pablo validates your ad content before submission and reports any errors back as comments in your source data. This means you'll know exactly what needs to be fixed and where. Common errors include missing required fields, invalid URLs, or asset dimension issues.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="limitations">
+              <AccordionTrigger className="text-primary">Are there any limitations I should be aware of?</AccordionTrigger>
+              <AccordionContent className="text-foreground">
+                Due to Meta's API limitations, there may be a limit to how many ads can be built in an hour. Pablo is designed to work within these constraints and will queue your requests appropriately. Additionally, some advanced Meta Ads Manager features may require manual configuration in the Meta interface.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="cost">
+              <AccordionTrigger className="text-primary">How much does Pablo cost?</AccordionTrigger>
+              <AccordionContent className="text-foreground">
+                Pablo is currently in beta and is $100USD per month for beta testers. We will be launching a subscription model in the future.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="access">
+              <AccordionTrigger className="text-primary">How do I get access to Pablo?</AccordionTrigger>
+              <AccordionContent className="text-foreground">
+                While we are in testing you'll need to <a href="https://developers.facebook.com/" className="text-primary hover:underline">set up a developer account</a>, then give us your Facebook ID (you can paste your profile URL into <a href="https://lookup-id.com/#" className="text-primary hover:underline">this tool</a>). We'll then add you to the beta list and you'll need to <a href="https://developers.facebook.com/settings/developer/requests/" className="text-primary hover:underline">accept our invitation here</a>.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
     </div>
   );
-}
+} 

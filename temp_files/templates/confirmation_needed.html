@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6">Confirm Your Email</h2>
+    
+    <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded mb-6">
+        <p class="font-bold">Check your inbox</p>
+        <p class="text-sm">We've sent a confirmation email to <strong>{{ email }}</strong>.</p>
+        <p class="text-sm mt-2">Please click the link in that email to activate your account.</p>
+    </div>
+    
+    <div class="text-sm text-gray-600">
+        <p>If you don't see the email, please check your spam folder.</p>
+        <p class="mt-2">You won't be able to log in until you confirm your email address.</p>
+    </div>
+    
+    <div class="mt-6">
+        <a href="/auth/login" class="text-blue-500 hover:text-blue-700 font-medium">
+            Return to login page
+        </a>
+    </div>
+</div>
+{% endblock %} 

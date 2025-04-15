@@ -29,7 +29,7 @@ export function Header() {
         <div className="flex flex-1 items-center justify-end space-x-2">
           <nav className="flex items-center space-x-2">
             <Button variant="ghost" asChild>
-              <Link href="#">Login</Link>
+              <Link href="https://app.pablo.social/auth/login">Login</Link>
             </Button>
           </nav>
         </div>

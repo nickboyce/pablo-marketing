@@ -35,7 +35,7 @@ export default function Home() {
           </h1>
           
           <div className="text-xl md:text-2xl leading-relaxed mb-12 text-foreground">
-            <p>Pablo makes ad creation 10× faster and eliminates errors. No more copy-pasting into Meta Ads Manager—Pablo integrates with Notion or Airtable to automate your creative workflows.</p>
+            <p>Pablo makes ad creation 10× faster and eliminates errors. No more copy-pasting into Meta Ads Manager. Pablo integrates with Notion or Airtable to automate your creative workflows.</p>
             <p className="mt-4">Now in private beta, generating 1,000+ ads per month.</p>
           </div>
       

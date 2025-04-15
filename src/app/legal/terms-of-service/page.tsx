@@ -7,10 +7,10 @@ export default function TermsOfService() {
         <p className="mb-4">Last updated: {new Date().toLocaleDateString()}</p>
         
         <h2 className="text-xl font-semibold mt-6 mb-3">1. Acceptance of Terms</h2>
-        <p>By accessing and using Pablo ("the Service"), you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these terms, do not use the Service.</p>
+        <p>By accessing and using Pablo (&quot;the Service&quot;), you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these terms, do not use the Service.</p>
         
         <h2 className="text-xl font-semibold mt-6 mb-3">2. Description of Service</h2>
-        <p>Pablo provides tools for managing and analyzing social media advertising. The Service is provided "as is" and on an "as available" basis without any representation or warranty, whether express, implied or statutory.</p>
+        <p>Pablo provides tools for managing and analyzing social media advertising. The Service is provided &quot;as is&quot; and on an &quot;as available&quot; basis without any representation or warranty, whether express, implied or statutory.</p>
         
         <h2 className="text-xl font-semibold mt-6 mb-3">3. User Accounts</h2>
         <p>To use certain features of the Service, you must register for an account. You agree to provide accurate, current, and complete information during the registration process and to update such information to keep it accurate, current, and complete.</p>
@@ -35,7 +35,7 @@ export default function TermsOfService() {
         <p>In no event shall Pablo, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.</p>
         
         <h2 className="text-xl font-semibold mt-6 mb-3">8. Changes to Terms</h2>
-        <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+        <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will provide at least 30 days&apos; notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
         
         <h2 className="text-xl font-semibold mt-6 mb-3">9. Contact Us</h2>
         <p>If you have any questions about these Terms, please contact us at:</p>

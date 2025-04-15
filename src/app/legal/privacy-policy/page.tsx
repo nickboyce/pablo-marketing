@@ -7,7 +7,7 @@ export default function PrivacyPolicy() {
         <p className="mb-4">Last updated: {new Date().toLocaleDateString()}</p>
         
         <h2 className="text-xl font-semibold mt-6 mb-3">1. Introduction</h2>
-        <p>Welcome to Pablo ("we," "our," or "us"). We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
+        <p>Welcome to Pablo (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
         
         <h2 className="text-2xl mt-6 mb-3">2. Data We Collect</h2>
         <p>We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:</p>

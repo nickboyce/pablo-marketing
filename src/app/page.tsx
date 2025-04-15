@@ -1,5 +1,7 @@
 "use client"; // Needed for useState and useRef
 
+/* eslint-disable react/no-unescaped-entities */
+
 import { useState, useRef, useEffect } from 'react'; // Import useEffect
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
@@ -29,7 +31,7 @@ export default function Home() {
       <section className="py-12 lg:py-8">
         <div className="mb-20">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8 text-primary">
-            Building Facebook ads doesn't need to be painful
+            Building Facebook ads doesn&apos;t need to be painful
           </h1>
           
           <div className="text-xl md:text-2xl leading-relaxed mb-12 text-foreground">
@@ -91,7 +93,7 @@ export default function Home() {
                 <CardTitle className="text-primary">Naming convention compliance</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-foreground">Ensure all your ads follow your team's naming conventions automatically.</p>
+                <p className="text-foreground">Ensure all your ads follow your naming conventions automatically.</p>
               </CardContent>
             </Card>
             
@@ -164,7 +166,7 @@ export default function Home() {
             <AccordionItem value="errors">
               <AccordionTrigger className="text-primary">How does Pablo handle errors?</AccordionTrigger>
               <AccordionContent className="text-foreground">
-                Pablo validates your ad content before submission and reports any errors back as comments in your source data. This means you'll know exactly what needs to be fixed and where. Common errors include missing required fields, invalid URLs, or asset dimension issues.
+                Pablo validates your ad content before submission and reports any errors back as comments in your source data. This means you will know exactly what needs to be fixed and where. Common errors include missing required fields, invalid URLs, or asset dimension issues.
               </AccordionContent>
             </AccordionItem>
 
@@ -185,7 +187,7 @@ export default function Home() {
             <AccordionItem value="access">
               <AccordionTrigger className="text-primary">How do I get access to Pablo?</AccordionTrigger>
               <AccordionContent className="text-foreground">
-                While we are in testing you'll need to <a href="https://developers.facebook.com/" className="text-primary hover:underline">set up a developer account</a>, then give us your Facebook ID (you can paste your profile URL into <a href="https://lookup-id.com/#" className="text-primary hover:underline">this tool</a>). We'll then add you to the beta list and you'll need to <a href="https://developers.facebook.com/settings/developer/requests/" className="text-primary hover:underline">accept our invitation here</a>.
+                While we are in testing you will need to <a href="https://developers.facebook.com/" className="text-primary hover:underline">set up a developer account</a>, then give us your Facebook ID (you can paste your profile URL into <a href="https://lookup-id.com/#" className="text-primary hover:underline">this tool</a>). We&apos;ll then add you to the beta list and you&apos;ll need to <a href="https://developers.facebook.com/settings/developer/requests/" className="text-primary hover:underline">accept our invitation here</a>.
               </AccordionContent>
             </AccordionItem>
           </Accordion>

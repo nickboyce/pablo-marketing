@@ -3,6 +3,7 @@ import { Space_Grotesk, Inter } from "next/font/google"; // Import Inter
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { PostHogProvider } from "@/components/providers/posthog-provider";
 
 // Configure Inter for body
 const inter = Inter({
@@ -31,13 +32,15 @@ export default function RootLayout({
     <html lang="en">
       {/* Apply both font variables */}
       <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-1 container mx-auto px-4 py-8 max-w-4xl">
-            {children}
-          </main>
-          <Footer />
-        </div>
+        <PostHogProvider>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-1 container mx-auto px-4 py-8 max-w-4xl">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </PostHogProvider>
       </body>
     </html>
   );

@@ -7,6 +7,7 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { Play } from 'lucide-react'; // Import Play icon
+import { posthog } from '../lib/posthog';
 
 export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -14,6 +15,10 @@ export default function Home() {
 
   const handlePlayClick = () => {
     setIsPlaying(true);
+    posthog.capture('video_play_clicked', {
+      video_type: 'demo',
+      location: 'hero_section'
+    });
   };
 
   useEffect(() => {
@@ -42,12 +47,18 @@ export default function Home() {
       
           <div className="flex flex-col sm:flex-row gap-4">
             <Button variant="accent" size="lg" asChild>
-              <a href="https://trampoline-analytics.notion.site/1aed8901aa2780fb86aacf588ebd6384">
+              <a 
+                href="https://trampoline-analytics.notion.site/1aed8901aa2780fb86aacf588ebd6384" target="_blank"
+                onClick={() => posthog.capture('join_waitlist_clicked', { location: 'hero_section' })}
+              >
                 Join waitlist
               </a>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <a href="https://calendar.notion.so/meet/nickboyce/eya49j4on4">
+              <a 
+                href="https://calendar.notion.so/meet/nickboyce/eya49j4on4" target="_blank"
+                onClick={() => posthog.capture('book_demo_clicked', { location: 'hero_section' })}
+              >
                 Book a Demo
               </a>
             </Button>

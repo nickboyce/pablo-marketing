@@ -35,15 +35,22 @@ export default function Home() {
           </h1>
           
           <div className="text-xl md:text-2xl leading-relaxed mb-12 text-foreground">
-            <p>Pablo makes ad creation 10× faster and eliminates errors. No more copy-pasting into Meta Ads Manager. Pablo integrates with Notion or Airtable to automate your creative workflows.</p>
+            <p>Pablo makes ad creation 10× faster and eliminates errors. No more copy-pasting into Meta Ads Manager. Pablo integrates with Notion, Airtable, and Google Sheets to automate your creative workflows. Our API enables seamless imports from your existing workflows.</p>
             <p className="mt-4">Now in private beta, generating 1,000+ ads per month.</p>
           </div>
       
-          <Button variant="accent" size="lg" asChild>
-            <a href="https://trampoline-analytics.notion.site/1aed8901aa2780fb86aacf588ebd6384">
-              Join waitlist
-            </a>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button variant="accent" size="lg" asChild>
+              <a href="https://trampoline-analytics.notion.site/1aed8901aa2780fb86aacf588ebd6384">
+                Join waitlist
+              </a>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <a href="https://calendar.notion.so/meet/nickboyce/eya49j4on4">
+                Book a Demo
+              </a>
+            </Button>
+          </div>
         </div>
 
         {/* Video Demo Section - Updated */}
@@ -102,7 +109,7 @@ export default function Home() {
                 <CardTitle className="text-primary">Customised assets</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-foreground">Support for customized square and vertical formats (more formats coming soon).</p>
+                <p className="text-foreground">Support for customized square, vertical and mid formats.</p>
               </CardContent>
             </Card>
             
@@ -111,7 +118,7 @@ export default function Home() {
                 <CardTitle className="text-primary">Build from where you already work</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-foreground">BYO Notion or Airtable databases or use our templates.</p>
+                <p className="text-foreground">BYO Notion, Airtable or Google Sheets or use our templates.</p>
               </CardContent>
             </Card>
             

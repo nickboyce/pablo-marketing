@@ -35,8 +35,9 @@ export default function Home() {
           </h1>
           
           <div className="text-xl md:text-2xl leading-relaxed mb-12 text-foreground">
-            <p>Pablo makes ad creation 10× faster and eliminates errors. No more copy-pasting into Meta Ads Manager. Pablo integrates with Notion, Airtable, and Google Sheets to automate your creative workflows. Our API enables seamless imports from your existing workflows.</p>
-            <p className="mt-4">Now in private beta, generating 1,000+ ads per month.</p>
+            <p>Pablo makes ad uploads 10× faster than manual uploads and eliminates errors. No more copy-pasting into Meta Ads Manager. Pablo integrates with Notion, Airtable, and Google Sheets to automate your creative workflows.</p>
+            <p className="mt-4">Creative is the biggest leverage in social advertising—and everyone needs more creative diversity. Pablo removes the upload bottleneck so you can scale your creative volume effortlessly.</p>
+            <p className="mt-4 font-semibold">Now in private beta, generating 1,000+ ads per month.</p>
           </div>
       
           <div className="flex flex-col sm:flex-row gap-4">
@@ -131,14 +132,6 @@ export default function Home() {
               </CardContent>
             </Card>
             
-            <Card className="bg-card">
-              <CardHeader>
-                <CardTitle className="text-primary">Actionable feedback</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-foreground">If Pablo has any problems, they are reported back as comments for easy troubleshooting.</p>
-              </CardContent>
-            </Card>
             
             <Card className="bg-card">
               <CardHeader>
@@ -146,6 +139,20 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="text-foreground">Experimental support for instant forms creation.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-card">
+              <CardHeader>
+                <CardTitle className="text-primary flex items-center gap-2">
+                  Pablo API
+                  <span className="text-xs font-medium bg-green-100 text-green-800 px-1.5 py-0 rounded-full">
+                    NEW
+                  </span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground">Single API endpoint to create ads directly in Meta Ads Manager. Perfect for developers and custom integrations.</p>
               </CardContent>
             </Card>
           </div>

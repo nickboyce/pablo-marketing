@@ -40,7 +40,7 @@ export default function Home() {
           </h1>
           
           <div className="text-xl md:text-2xl leading-relaxed mb-12 text-foreground">
-            <p>Pablo automates Facebook ad uploads from Notion, Airtable, and Google Sheets—making creative workflows 10× faster and error-free. More creative diversity, less manual work.</p>
+            <p>Pablo automates Facebook ad uploads from Notion, Airtable, and Google Sheets – making creative workflows 10× faster and error-free. More creative diversity, less manual work.</p>
             <p className="mt-4 font-semibold">Now in private beta, generating 1,000+ ads per month.</p>
           </div>
       

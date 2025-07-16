@@ -36,12 +36,11 @@ export default function Home() {
       <section className="py-12 lg:py-8">
         <div className="mb-20">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8 text-primary">
-            Building Facebook ads doesn&apos;t need to be painful
+            Stop wasting time uploading ads. Start scaling creative.
           </h1>
           
           <div className="text-xl md:text-2xl leading-relaxed mb-12 text-foreground">
-            <p>Pablo makes ad uploads 10× faster than manual uploads and eliminates errors. No more copy-pasting into Meta Ads Manager. Pablo integrates with Notion, Airtable, and Google Sheets to automate your creative workflows.</p>
-            <p className="mt-4">Creative is the biggest leverage in social advertising—and everyone needs more creative diversity. Pablo removes the upload bottleneck so you can scale your creative volume effortlessly.</p>
+            <p>Pablo automates Facebook ad uploads from Notion, Airtable, and Google Sheets—making creative workflows 10× faster and error-free. More creative diversity, less manual work.</p>
             <p className="mt-4 font-semibold">Now in private beta, generating 1,000+ ads per month.</p>
           </div>
       
@@ -104,7 +103,10 @@ export default function Home() {
         
         {/* Features Section */}
         <div className="">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-primary">Features</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-primary">Fits your process. Amplifies your output.</h2>
+          <div className="text-xl md:text-2xl leading-relaxed mb-12 text-foreground">
+            <p>Pablo plugs into your existing creative workflows so your team can keep working the way they already do, just 10× faster.</p>
+          </div>
           
           <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
             <Card className="bg-card">
@@ -121,7 +123,7 @@ export default function Home() {
                 <CardTitle className="text-primary">Customised assets</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-foreground">Support for customized square, vertical and mid formats.</p>
+                <p className="text-foreground">Support for square, vertical and 4:5 aspect ratios in any combination.</p>
               </CardContent>
             </Card>
             
@@ -139,17 +141,20 @@ export default function Home() {
                 <CardTitle className="text-primary">Template inheritance</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-foreground">Inherits tracking, social profile linking and Advantage+ AI preferences from a template ad.</p>
+                <p className="text-foreground">Inherits tracking, social profile linking and Advantage+ preferences from a template ad.</p>
               </CardContent>
             </Card>
             
             
             <Card className="bg-card">
               <CardHeader>
-                <CardTitle className="text-primary">Instant forms creation</CardTitle>
+                <CardTitle className="text-primary flex items-center gap-2">
+                  Instant forms creation
+                  <span className="text-xs font-medium bg-green-100 text-green-800 px-1.5 py-0 rounded-full">BETA</span>
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-foreground">Experimental support for instant forms creation.</p>
+                <p className="text-foreground">Experimental support for instant forms creation with multi-language support.</p>
               </CardContent>
             </Card>
             
@@ -157,13 +162,11 @@ export default function Home() {
               <CardHeader>
                 <CardTitle className="text-primary flex items-center gap-2">
                   Pablo API
-                  <span className="text-xs font-medium bg-green-100 text-green-800 px-1.5 py-0 rounded-full">
-                    NEW
-                  </span>
+                  <span className="text-xs font-medium bg-green-100 text-green-800 px-1.5 py-0 rounded-full">NEW</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-foreground">Single API endpoint to create ads directly in Meta Ads Manager. Perfect for developers and custom integrations.</p>
+                <p className="text-foreground">Meta API cheat code. Single API endpoint to create ads from your agents or automations.</p>
               </CardContent>
             </Card>
           </div>

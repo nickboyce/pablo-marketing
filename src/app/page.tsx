@@ -41,26 +41,20 @@ export default function Home() {
           
           <div className="text-xl md:text-2xl leading-relaxed mb-12 text-foreground">
             <p>Pablo automates Facebook ad uploads from Notion, Airtable, and Google Sheets – making creative workflows 10× faster and error-free. More creative diversity, less manual work.</p>
-            <p className="mt-4 font-semibold">Now in private beta, generating 1,000+ ads per month.</p>
           </div>
       
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <Button variant="accent" size="lg" asChild>
-              <a 
-                href="https://trampoline-analytics.notion.site/1aed8901aa2780fb86aacf588ebd6384" target="_blank"
-                onClick={() => posthog.capture('join_waitlist_clicked', { location: 'hero_section' })}
+              <a
+                href="https://app.pablo.social/auth/register" target="_blank"
+                onClick={() => posthog.capture('start_free_trial_clicked', { location: 'hero_section' })}
               >
-                Join waitlist
+                Start free trial
               </a>
             </Button>
-            <Button variant="outline" size="lg" asChild>
-              <a 
-                href="https://calendar.notion.so/meet/nickboyce/eya49j4on4" target="_blank"
-                onClick={() => posthog.capture('book_demo_clicked', { location: 'hero_section' })}
-              >
-                Book a Demo
-              </a>
-            </Button>
+            <p className="text-sm text-muted-foreground">
+              Free for 30 days. No credit card required.
+            </p>
           </div>
         </div>
 
@@ -111,22 +105,48 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
             <Card className="bg-card">
               <CardHeader>
+                <CardTitle className="text-primary flex items-center gap-2">
+                  <a href="https://docs.pablo.social/integrations/api/" target="_blank" className="hover:underline">Pablo API</a>
+                  <span className="text-xs font-medium bg-green-100 text-green-800 px-1.5 py-0 rounded-full">NEW</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground">Meta API cheat code. Single API endpoint to create ads from your agents or automations.</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card">
+              <CardHeader>
+                <CardTitle className="text-primary flex items-center gap-2">
+                  <a href="https://docs.pablo.social/integrations/mcp/" target="_blank" className="hover:underline">Pablo MCP</a>
+                  <span className="text-xs font-medium bg-green-100 text-green-800 px-1.5 py-0 rounded-full">NEW</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-foreground">Plug Pablo into Claude, Cursor or any MCP-compatible agent.</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-card">
+              <CardHeader>
                 <CardTitle className="text-primary">Naming convention compliance</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-foreground">Ensure all your ads follow your naming conventions automatically.</p>
               </CardContent>
             </Card>
-            
+
             <Card className="bg-card">
               <CardHeader>
-                <CardTitle className="text-primary">Customised assets</CardTitle>
+                <CardTitle className="text-primary">
+                  <a href="https://docs.pablo.social/guides/placement-assets/" target="_blank" className="hover:underline">Placement-specific assets</a>
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-foreground">Support for square, vertical and 4:5 aspect ratios in any combination.</p>
+                <p className="text-foreground">Square, 4:5 and 9:16 in any combination, mapped to the right placements automatically.</p>
               </CardContent>
             </Card>
-            
+
             <Card className="bg-card">
               <CardHeader>
                 <CardTitle className="text-primary">Build from where you already work</CardTitle>
@@ -135,38 +155,16 @@ export default function Home() {
                 <p className="text-foreground">BYO Notion, Airtable or Google Sheets or use our templates.</p>
               </CardContent>
             </Card>
-            
-            <Card className="bg-card">
-              <CardHeader>
-                <CardTitle className="text-primary">Template inheritance</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-foreground">Inherits tracking, social profile linking and Advantage+ preferences from a template ad.</p>
-              </CardContent>
-            </Card>
-            
-            
+
             <Card className="bg-card">
               <CardHeader>
                 <CardTitle className="text-primary flex items-center gap-2">
-                  Instant forms creation
+                  <a href="https://docs.pablo.social/guides/partnership-ads/" target="_blank" className="hover:underline">Partnership ads</a>
                   <span className="text-xs font-medium bg-green-100 text-green-800 px-1.5 py-0 rounded-full">BETA</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-foreground">Experimental support for instant forms creation with multi-language support.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-card">
-              <CardHeader>
-                <CardTitle className="text-primary flex items-center gap-2">
-                  Pablo API
-                  <span className="text-xs font-medium bg-green-100 text-green-800 px-1.5 py-0 rounded-full">NEW</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-foreground">Meta API cheat code. Single API endpoint to create ads from your agents or automations.</p>
+                <p className="text-foreground">Run collaborative ads with creator and brand partners.</p>
               </CardContent>
             </Card>
           </div>
@@ -187,7 +185,7 @@ export default function Home() {
             <AccordionItem value="ads">
               <AccordionTrigger className="text-primary">What types of ads can I create with Pablo?</AccordionTrigger>
               <AccordionContent className="text-foreground">
-                Currently, Pablo supports Image and Video ad formats with square and vertical assets. We're working on adding support for Carousel ads and more asset formats in the near future. Pablo inherits tracking, social profile linking, and Advantage+ AI preferences from your template ads.
+                Pablo supports Image, Video and Carousel ads with square, vertical and 4:5 assets in any combination. Pablo inherits tracking, social profile linking, and Advantage+ AI preferences from your template ads.
               </AccordionContent>
             </AccordionItem>
 
@@ -198,24 +196,10 @@ export default function Home() {
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="limitations">
-              <AccordionTrigger className="text-primary">Are there any limitations I should be aware of?</AccordionTrigger>
-              <AccordionContent className="text-foreground">
-                Due to Meta's API limitations, there may be a limit to how many ads can be built in an hour. Pablo is designed to work within these constraints and will queue your requests appropriately. Additionally, some advanced Meta Ads Manager features may require manual configuration in the Meta interface.
-              </AccordionContent>
-            </AccordionItem>
-
             <AccordionItem value="cost">
               <AccordionTrigger className="text-primary">How much does Pablo cost?</AccordionTrigger>
               <AccordionContent className="text-foreground">
-                Pablo is currently in beta and is $100USD per month for beta testers. We will be launching a subscription model in the future.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="access">
-              <AccordionTrigger className="text-primary">How do I get access to Pablo?</AccordionTrigger>
-              <AccordionContent className="text-foreground">
-                While we are in testing you will need to <a href="https://developers.facebook.com/" className="text-primary hover:underline">set up a developer account</a>, then give us your Facebook ID (you can paste your profile URL into <a href="https://lookup-id.com/#" className="text-primary hover:underline">this tool</a>). We&apos;ll then add you to the beta list and you&apos;ll need to <a href="https://developers.facebook.com/settings/developer/requests/" className="text-primary hover:underline">accept our invitation here</a>.
+                Pablo is $99USD per month.
               </AccordionContent>
             </AccordionItem>
           </Accordion>

@@ -9,14 +9,21 @@ export function Footer() {
             © {new Date().getFullYear()} Pablo. All rights reserved.
           </div>
           <div className="flex space-x-6">
-            <Link 
-              href="/legal/privacy-policy" 
+            <Link
+              href="https://calendar.notion.so/meet/nickboyce/eya49j4on4"
+              target="_blank"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Book a Demo
+            </Link>
+            <Link
+              href="/legal/privacy-policy"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Privacy Policy
             </Link>
-            <Link 
-              href="/legal/terms-of-service" 
+            <Link
+              href="/legal/terms-of-service"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Terms of Service
